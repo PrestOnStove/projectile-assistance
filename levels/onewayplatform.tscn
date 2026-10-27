@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://1li2qb2qdpuv"]
+
+[sub_resource type="Gradient" id="Gradient_n1ku5"]
+colors = PackedColorArray(0, 0, 1, 1, 0, 0, 1, 0.0627451)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jcyrx"]
+gradient = SubResource("Gradient_n1ku5")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qxjbg"]
+size = Vector2(64, 64)
+
+[node name="onewayplatform" type="Sprite2D" unique_id=186997305]
+z_index = -1
+scale = Vector2(2.0000002, 0.12499997)
+texture = SubResource("GradientTexture2D_jcyrx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=123164113]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1131220223]
+shape = SubResource("RectangleShape2D_qxjbg")
+one_way_collision = true

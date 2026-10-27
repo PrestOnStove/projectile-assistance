@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://blgl4aukbb74a"]
+
+[ext_resource type="Script" uid="uid://bolen8dapr2it" path="res://player/scripts/player.gd" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://p1s4twnbsi75" path="res://player/scripts/idle.gd" id="2_g1dw6"]
+[ext_resource type="Script" uid="uid://y64im4vwrune" path="res://player/scripts/run.gd" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://i4el1re23pg5" path="res://player/scripts/jump.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://dnwpjve6euib4" path="res://player/scripts/fall.gd" id="5_g6k8r"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kqu6x"]
+size = Vector2(18, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oul6g"]
+size = Vector2(16, 47)
+
+[node name="Player" type="CharacterBody2D" unique_id=22443047]
+script = ExtResource("1_oul6g")
+
+[node name="States" type="Node" parent="." unique_id=1360565825]
+
+[node name="Idle" type="Node" parent="States" unique_id=1068484119]
+unique_name_in_owner = true
+script = ExtResource("2_g1dw6")
+
+[node name="Run" type="Node" parent="States" unique_id=331404740]
+unique_name_in_owner = true
+script = ExtResource("3_yw30f")
+
+[node name="Jump" type="Node" parent="States" unique_id=1574420508]
+unique_name_in_owner = true
+script = ExtResource("4_qjkh3")
+
+[node name="Fall" type="Node" parent="States" unique_id=1276404557]
+unique_name_in_owner = true
+script = ExtResource("5_g6k8r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=780470863]
+position = Vector2(0, -24)
+texture = SubResource("PlaceholderTexture2D_kqu6x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1334472161]
+position = Vector2(0, -23.5)
+shape = SubResource("RectangleShape2D_oul6g")
+debug_color = Color(0, 0.6, 0.69803923, 0.38431373)
+
+[node name="Label" type="Label" parent="." unique_id=717202596]
+offset_left = -24.0
+offset_top = -72.0
+offset_right = 24.0
+offset_bottom = -49.0
+theme_override_font_sizes/font_size = 10
+text = "label"
+horizontal_alignment = 1

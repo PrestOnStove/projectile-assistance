@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bugp0pfs3qfn3"
+path="res://.godot/imported/ground slam.wav-0259ce222fa136ebb44c106f1e4ee9cb.sample"
+
+[deps]
+
+source_file="res://enemies/ch_06_boss_battles/audio/ground slam.wav"
+dest_files=["res://.godot/imported/ground slam.wav-0259ce222fa136ebb44c106f1e4ee9cb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

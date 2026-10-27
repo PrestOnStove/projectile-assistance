@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://ci2p1ac2xcqnr"]
+
+[ext_resource type="Texture2D" uid="uid://b4mi0m3fys86g" path="res://enemies/enemy_projectiles/Fireball_Sprite_Sheet.png" id="1_8sxul"]
+[ext_resource type="Script" uid="uid://3fgm3gb8vtda" path="res://enemies/scripts/projectile.gd" id="1_qu3ma"]
+[ext_resource type="Script" uid="uid://hcmcpleyat4q" path="res://general/scripts/hazard_area.gd" id="2_j3noo"]
+[ext_resource type="AudioStream" uid="uid://bpamgfp0iyxl5" path="res://general/audio/hit.wav" id="2_r7r82"]
+[ext_resource type="AudioStream" uid="uid://rs45ww5k5rpi" path="res://general/audio/boom.wav" id="3_6px1o"]
+[ext_resource type="Script" uid="uid://0fhn0hjo3l6d" path="res://general/scripts/light_flicker.gd" id="3_j3noo"]
+
+[sub_resource type="Animation" id="Animation_8sxul"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j3noo"]
+resource_name = "default"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qu3ma"]
+resource_name = "destroy"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5707964]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 14, 15, 12, 12, 13, 14, 15]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, -1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qu3ma"]
+_data = {
+&"RESET": SubResource("Animation_8sxul"),
+&"default": SubResource("Animation_j3noo"),
+&"destroy": SubResource("Animation_qu3ma")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qu3ma"]
+radius = 4.633272
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uk7bx"]
+radius = 5.559927
+height = 42.75178
+
+[sub_resource type="Gradient" id="Gradient_dok03"]
+offsets = PackedFloat32Array(0, 0.66863906, 0.84615386, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9998151, 0.72415155, 0.0067601814, 1, 0.52630603, 0.11398575, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r7r82"]
+gradient = SubResource("Gradient_dok03")
+width = 150
+height = 150
+fill = 1
+fill_from = Vector2(0.50214595, 0.49785408)
+fill_to = Vector2(0.84549356, 0.19742489)
+
+[node name="Fireball_Enemy" type="CharacterBody2D" unique_id=1060850700]
+collision_layer = 0
+collision_mask = 19
+script = ExtResource("1_qu3ma")
+horizontal_only = true
+spawn_audio = ExtResource("2_r7r82")
+destroy_audio = ExtResource("3_6px1o")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1472839934]
+texture = ExtResource("1_8sxul")
+hframes = 4
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=42711885]
+libraries/ = SubResource("AnimationLibrary_qu3ma")
+autoplay = &"default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2011804728]
+visible = false
+scale = Vector2(2.0380359, 0.29347503)
+shape = SubResource("CapsuleShape2D_qu3ma")
+
+[node name="HazardArea" type="Area2D" parent="." unique_id=842530840]
+visible = false
+collision_layer = 0
+collision_mask = 19
+script = ExtResource("2_j3noo")
+metadata/_custom_type_script = "uid://hcmcpleyat4q"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HazardArea" unique_id=414904033]
+scale = Vector2(2.1583018, 0.28069004)
+shape = SubResource("CapsuleShape2D_uk7bx")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=675194095]
+texture = SubResource("GradientTexture2D_r7r82")
+script = ExtResource("3_j3noo")

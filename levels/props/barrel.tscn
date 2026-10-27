@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dghqm0qv67qi3"]
+
+[ext_resource type="Script" uid="uid://diuh5gc7sx2we" path="res://general/scripts/breakable.gd" id="1_34rxq"]
+[ext_resource type="Script" uid="uid://dvfc0mfdjjfhm" path="res://00_global/visual_effects/hit_particle_settings.gd" id="2_w0ej2"]
+[ext_resource type="Resource" uid="uid://cbu73hwtaix3r" path="res://00_global/visual_effects/hit_particle_settings/hit_wood_large.tres" id="3_vh237"]
+[ext_resource type="Script" uid="uid://b244kaehmxfnc" path="res://general/scripts/damage_area.gd" id="4_b47e3"]
+[ext_resource type="Texture2D" uid="uid://cbkrh7by8ahmb" path="res://general/sprites/props_destructible.png" id="5_yo2t2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtq5n"]
+size = Vector2(22, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6xy2"]
+atlas = ExtResource("5_yo2t2")
+region = Rect2(108, 38, 24, 25)
+
+[node name="Barrel" type="Node2D" unique_id=769156873]
+script = ExtResource("1_34rxq")
+hit_particles = Array[ExtResource("2_w0ej2")]([ExtResource("3_vh237")])
+metadata/_custom_type_script = "uid://diuh5gc7sx2we"
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=174476596]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("4_b47e3")
+metadata/_custom_type_script = "uid://b244kaehmxfnc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=985822330]
+z_index = 1
+shape = SubResource("RectangleShape2D_dtq5n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=465671664]
+texture = SubResource("AtlasTexture_d6xy2")

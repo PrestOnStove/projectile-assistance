@@ -1,0 +1,360 @@
+[gd_scene format=3 uid="uid://csqdqmhb0dfws"]
+
+[ext_resource type="Script" uid="uid://o0un7n3fe6pn" path="res://pause_menu/scripts/pause_menu.gd" id="1_5hbt6"]
+[ext_resource type="PackedScene" uid="uid://cccvgv8jvhh4" path="res://pause_menu/map_node.tscn" id="2_rd7dy"]
+[ext_resource type="Script" uid="uid://bcooqnf15d0au" path="res://pause_menu/scripts/abilities_list.gd" id="3_b4s0c"]
+[ext_resource type="Texture2D" uid="uid://kg7unswsets1" path="res://player/sprites/abilities.png" id="3_uwtdo"]
+
+[sub_resource type="FontVariation" id="FontVariation_5hbt6"]
+spacing_glyph = 6
+
+[sub_resource type="Gradient" id="Gradient_rd7dy"]
+offsets = PackedFloat32Array(0.01183432, 0.73964494, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2509804, 1, 0.91764706, 0.44705883, 0.023529412, 0, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwtdo"]
+gradient = SubResource("Gradient_rd7dy")
+width = 5
+height = 5
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Animation" id="Animation_b4s0c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_s1glv"]
+resource_name = "default"
+length = 0.6
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.06666667, 0.9607843, 0.6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wn31l"]
+_data = {
+&"RESET": SubResource("Animation_b4s0c"),
+&"default": SubResource("Animation_s1glv")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b4s0c"]
+load_path = "res://.godot/imported/abilities.png-63196a83fde4f4f8174494127ae437fd.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1glv"]
+atlas = SubResource("CompressedTexture2D_b4s0c")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn31l"]
+atlas = ExtResource("3_uwtdo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0obc"]
+atlas = ExtResource("3_uwtdo")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cux0y"]
+atlas = ExtResource("3_uwtdo")
+region = Rect2(32, 96, 32, 32)
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1018646704]
+process_mode = 3
+script = ExtResource("1_5hbt6")
+
+[node name="Control" type="Control" parent="." unique_id=26877481]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1540509606]
+modulate = Color(0.19607843, 0.19607843, 0.19607843, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Control" unique_id=1930877285]
+modulate = Color(0.04622054, 0.04622054, 0.04622054, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 36.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=476341983]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 25.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.40792882, 0.16908866, 0.16908866, 1)
+theme_override_fonts/font = SubResource("FontVariation_5hbt6")
+text = "PAUSED"
+horizontal_alignment = 2
+
+[node name="PauseScreen" type="Control" parent="." unique_id=731468646]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseScreen" unique_id=707679818]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 91.0
+offset_bottom = 18.0
+text = "Abilities"
+
+[node name="Label2" type="Label" parent="PauseScreen" unique_id=1013905928]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 3.0
+offset_right = 184.0
+offset_bottom = 18.0
+text = "Map"
+
+[node name="Map" type="Control" parent="PauseScreen" unique_id=87091322]
+anchors_preset = 0
+offset_left = 109.0
+offset_right = 445.0
+offset_bottom = 192.0
+
+[node name="MapNode" parent="PauseScreen/Map" unique_id=370588880 instance=ExtResource("2_rd7dy")]
+modulate = Color(0.22906065, 0.5526121, 0.26458788, 1)
+custom_minimum_size = Vector2(100, 13)
+layout_mode = 0
+offset_left = 15.0
+offset_top = 55.0
+offset_right = 82.0
+offset_bottom = 77.0
+linked_scene = "uid://mfgmqer5207o"
+entrances_top = Array[float]([])
+entrances_right = Array[float]([15.0])
+entrances_bottom = Array[float]([])
+entrances_left = Array[float]([])
+
+[node name="MapNode2" parent="PauseScreen/Map" unique_id=982365622 instance=ExtResource("2_rd7dy")]
+modulate = Color(0.22906065, 0.5526121, 0.26458788, 1)
+layout_mode = 0
+offset_left = 116.0
+offset_top = 62.0
+offset_right = 183.0
+offset_bottom = 84.0
+linked_scene = "uid://d1tni61udqx0w"
+entrances_top = Array[float]([19.2])
+entrances_right = Array[float]([])
+entrances_bottom = Array[float]([])
+entrances_left = Array[float]([8.2])
+
+[node name="MapNode3" parent="PauseScreen/Map" unique_id=555348555 instance=ExtResource("2_rd7dy")]
+modulate = Color(0.5460356, 0.48382065, 0.39870316, 1)
+layout_mode = 0
+offset_left = 133.0
+offset_top = 39.0
+offset_right = 200.0
+offset_bottom = 61.0
+linked_scene = "uid://c1qcghte25kk6"
+entrances_top = Array[float]([])
+entrances_right = Array[float]([])
+entrances_bottom = Array[float]([2.0, 60.8])
+entrances_left = Array[float]([])
+
+[node name="MapNode4" parent="PauseScreen/Map" unique_id=1031376130 instance=ExtResource("2_rd7dy")]
+modulate = Color(0.5460356, 0.48382065, 0.39870316, 1)
+layout_mode = 0
+offset_left = 192.0
+offset_top = 62.0
+offset_right = 259.0
+offset_bottom = 84.0
+linked_scene = "uid://crrp0lglko2r5"
+entrances_top = Array[float]([2.1333334])
+entrances_right = Array[float]([])
+entrances_bottom = Array[float]([])
+entrances_left = Array[float]([])
+
+[node name="PlayerIndicator" type="Control" parent="PauseScreen/Map" unique_id=630706697]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_left = 29.0
+offset_top = 33.0
+offset_right = 29.0
+offset_bottom = 33.0
+
+[node name="TextureRect" type="TextureRect" parent="PauseScreen/Map/PlayerIndicator" unique_id=1197514162]
+layout_mode = 0
+offset_right = 5.0
+offset_bottom = 5.0
+texture = SubResource("GradientTexture2D_uwtdo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseScreen/Map/PlayerIndicator" unique_id=855298629]
+libraries/ = SubResource("AnimationLibrary_wn31l")
+autoplay = &"default"
+
+[node name="SystemMenuButton" type="Button" parent="PauseScreen" unique_id=1267491348]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 400.0
+offset_top = 203.0
+offset_right = 475.0
+offset_bottom = 226.0
+text = "System"
+
+[node name="AbilitiesList" type="VBoxContainer" parent="PauseScreen" unique_id=941840793]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 41.0
+offset_right = 73.0
+offset_bottom = 181.0
+script = ExtResource("3_b4s0c")
+
+[node name="AbilityDoubleJump" type="TextureRect" parent="PauseScreen/AbilitiesList" unique_id=496274287]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_s1glv")
+stretch_mode = 3
+
+[node name="AbilityDash" type="TextureRect" parent="PauseScreen/AbilitiesList" unique_id=1048824844]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wn31l")
+stretch_mode = 3
+
+[node name="AbilityGroundSlam" type="TextureRect" parent="PauseScreen/AbilitiesList" unique_id=473414675]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_b0obc")
+stretch_mode = 3
+
+[node name="AbilityMorph" type="TextureRect" parent="PauseScreen/AbilitiesList" unique_id=1357176742]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_cux0y")
+stretch_mode = 3
+
+[node name="System" type="Control" parent="." unique_id=1574000785]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="System" unique_id=1747513298]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = 18.0
+offset_right = 192.0
+offset_bottom = 213.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="System/VBoxContainer" unique_id=1448714514]
+layout_mode = 2
+
+[node name="BackToMapButton" type="Button" parent="System/VBoxContainer/HBoxContainer" unique_id=1270523581]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back to Map"
+
+[node name="BackToTitleButton" type="Button" parent="System/VBoxContainer/HBoxContainer" unique_id=1449298049]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Back to Title"
+
+[node name="Label" type="Label" parent="System/VBoxContainer" unique_id=203527875]
+layout_mode = 2
+text = "Audio Levels"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="System/VBoxContainer" unique_id=804212974]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="System/VBoxContainer/HBoxContainer2" unique_id=372312307]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="System/VBoxContainer/HBoxContainer2" unique_id=916720357]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="System/VBoxContainer" unique_id=1931271656]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="System/VBoxContainer/HBoxContainer3" unique_id=164974779]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="System/VBoxContainer/HBoxContainer3" unique_id=213680107]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="System/VBoxContainer" unique_id=619755584]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="System/VBoxContainer/HBoxContainer4" unique_id=185551708]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "UI"
+
+[node name="UISlider" type="HSlider" parent="System/VBoxContainer/HBoxContainer4" unique_id=143415155]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.5

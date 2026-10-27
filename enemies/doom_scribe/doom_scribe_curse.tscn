@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://16l5pl5f37kc"]
+
+[ext_resource type="Script" uid="uid://x0kp5fgb7q6e" path="res://enemies/doom_scribe/doom_scribe_curse.gd" id="1_5h2xr"]
+[ext_resource type="Texture2D" uid="uid://ciiy82ejwm8yk" path="res://enemies/doom_scribe/DoomScribe-AttackSheet.png" id="1_8as7n"]
+[ext_resource type="Script" uid="uid://c2102jdaji5el" path="res://general/scripts/attack_area.gd" id="3_i62q2"]
+
+[sub_resource type="Animation" id="Animation_16s6l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5h2xr"]
+resource_name = "default"
+length = 2.95
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5, 1.6, 1.7, 1.8000001, 1.9, 2, 2.1000001, 2.2, 2.4, 2.6, 2.6999998, 2.75, 2.7501, 2.8, 2.85),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 26, 27, 28]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"damage_player"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i62q2"]
+_data = {
+&"RESET": SubResource("Animation_16s6l"),
+&"default": SubResource("Animation_5h2xr")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fum0w"]
+radius = 17.0
+
+[node name="DoomScribeCurse" type="Node2D" unique_id=85162782]
+modulate = Color(4.415934, 4.415934, 4.415934, 1)
+z_index = 45
+script = ExtResource("1_5h2xr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=816403582]
+texture = ExtResource("1_8as7n")
+hframes = 6
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=519162326]
+libraries/ = SubResource("AnimationLibrary_i62q2")
+autoplay = &"default"
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1422742336]
+collision_layer = 0
+collision_mask = 16
+monitoring = false
+monitorable = false
+script = ExtResource("3_i62q2")
+damage = 10.0
+metadata/_custom_type_script = "uid://c2102jdaji5el"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1292849601]
+shape = SubResource("CircleShape2D_fum0w")
+debug_color = Color(0.70196074, 0, 0.03376933, 0.41960785)

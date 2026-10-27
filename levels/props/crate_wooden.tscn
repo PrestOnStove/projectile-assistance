@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dt2q743e43qpm"]
+
+[ext_resource type="Script" uid="uid://diuh5gc7sx2we" path="res://general/scripts/breakable.gd" id="1_6ng2w"]
+[ext_resource type="Script" uid="uid://dvfc0mfdjjfhm" path="res://00_global/visual_effects/hit_particle_settings.gd" id="2_fpmn4"]
+[ext_resource type="Resource" uid="uid://dlom01ewmjej5" path="res://00_global/visual_effects/hit_particle_settings/hit_wood_medium.tres" id="3_jy6sd"]
+[ext_resource type="Resource" uid="uid://c5cvv64hqow0v" path="res://00_global/visual_effects/hit_particle_settings/hit_wood_small.tres" id="4_pfiku"]
+[ext_resource type="Resource" uid="uid://cbu73hwtaix3r" path="res://00_global/visual_effects/hit_particle_settings/hit_wood_large.tres" id="5_1ga2j"]
+[ext_resource type="Script" uid="uid://b244kaehmxfnc" path="res://general/scripts/damage_area.gd" id="6_11c3n"]
+[ext_resource type="Texture2D" uid="uid://cbkrh7by8ahmb" path="res://general/sprites/props_destructible.png" id="7_eo4gh"]
+[ext_resource type="Script" uid="uid://3w26r82hh01u" path="res://general/scripts/loot_dropper.gd" id="8_jy6sd"]
+[ext_resource type="Script" uid="uid://vps4tllxr416" path="res://general/scripts/loot_data.gd" id="9_pfiku"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7xqd"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ng2w"]
+size = Vector2(40, 30)
+
+[sub_resource type="Resource" id="Resource_jy6sd"]
+script = ExtResource("9_pfiku")
+item = "uid://dcwdxsar7ykh4"
+drop_chance = 1.0
+metadata/_custom_type_script = "uid://vps4tllxr416"
+
+[node name="Crate" type="Node2D" unique_id=1994355553]
+script = ExtResource("1_6ng2w")
+hit_particles = Array[ExtResource("2_fpmn4")]([ExtResource("3_jy6sd")])
+destroy_particles = Array[ExtResource("2_fpmn4")]([ExtResource("3_jy6sd"), ExtResource("4_pfiku"), ExtResource("5_1ga2j")])
+metadata/_custom_type_script = "uid://diuh5gc7sx2we"
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=241133761]
+collision_layer = 64
+collision_mask = 0
+script = ExtResource("6_11c3n")
+metadata/_custom_type_script = "uid://b244kaehmxfnc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1827762412]
+shape = SubResource("RectangleShape2D_i7xqd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1657010345]
+texture = ExtResource("7_eo4gh")
+region_enabled = true
+region_rect = Rect2(53, 28, 39, 35)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=855940439]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=528297085]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_6ng2w")
+
+[node name="LootDropper" type="Marker2D" parent="." unique_id=1283015466]
+position = Vector2(1, -14)
+script = ExtResource("8_jy6sd")
+items = Array[ExtResource("9_pfiku")]([SubResource("Resource_jy6sd")])
+metadata/_custom_type_script = "uid://3w26r82hh01u"

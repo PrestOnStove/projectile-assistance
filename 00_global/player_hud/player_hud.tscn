@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://c8bs8c5ytgnx6"]
+
+[ext_resource type="Texture2D" uid="uid://ngbx3kph7mh3" path="res://00_global/player_hud/health_bar_frame.png" id="1_hv14i"]
+[ext_resource type="Script" uid="uid://b1n2ukudnetd1" path="res://00_global/player_hud/player_hud.gd" id="1_vb1bs"]
+[ext_resource type="Resource" uid="uid://pkfbnpumc1gd" path="res://00_global/visual_effects/hit_particle_settings/hit_magic_blue.tres" id="3_26715"]
+[ext_resource type="Texture2D" uid="uid://dly2ejth1c87r" path="res://general/coin/coin.png" id="4_tdgrf"]
+
+[sub_resource type="Gradient" id="Gradient_vb1bs"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_26715"]
+gradient = SubResource("Gradient_vb1bs")
+height = 16
+
+[sub_resource type="Gradient" id="Gradient_tdgrf"]
+colors = PackedColorArray(0.8627451, 0.34117648, 0.34117648, 1, 0.87486136, 0.46619838, 0.46619838, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4jtec"]
+gradient = SubResource("Gradient_tdgrf")
+
+[sub_resource type="GDScript" id="GDScript_vb1bs"]
+script/source = "extends Button
+
+@export var particle_settings : HitParticleSettings
+
+func _ready() -> void:
+	pressed.connect( _on_pressed )
+	pass 
+
+
+func _on_pressed() -> void:
+	var player : Player = get_tree().get_first_node_in_group( \"Player\" )
+	player.morph_roll = !player.morph_roll
+	pass
+"
+
+[sub_resource type="Animation" id="Animation_dokri"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_edxf1"]
+resource_name = "default"
+length = 1.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jtec"]
+_data = {
+&"RESET": SubResource("Animation_dokri"),
+&"default": SubResource("Animation_edxf1")
+}
+
+[node name="PlayerHud" type="CanvasLayer" unique_id=865726198]
+layer = 2
+script = ExtResource("1_vb1bs")
+
+[node name="Control" type="Control" parent="." unique_id=609879473]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HPMarginContainer" type="MarginContainer" parent="Control" unique_id=1848136284]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 215.0
+offset_bottom = 28.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/HPMarginContainer" unique_id=375997445]
+layout_mode = 2
+texture = ExtResource("1_hv14i")
+region_rect = Rect2(0, 0, 40, 20)
+patch_margin_left = 27
+patch_margin_right = 7
+axis_stretch_horizontal = 1
+
+[node name="HPBar" type="TextureProgressBar" parent="Control/HPMarginContainer/NinePatchRect" unique_id=517799256]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 6.0
+offset_right = -3.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+rounded = true
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_26715")
+texture_progress = SubResource("GradientTexture2D_4jtec")
+
+[node name="Button" type="Button" parent="Control" unique_id=826088437]
+visible = false
+layout_mode = 0
+offset_left = 313.0
+offset_top = 18.0
+offset_right = 466.0
+offset_bottom = 41.0
+text = "Toggle morph roll
+
+"
+script = SubResource("GDScript_vb1bs")
+particle_settings = ExtResource("3_26715")
+
+[node name="GameOver" type="Control" parent="Control" unique_id=1355296476]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/GameOver" unique_id=197837509]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.73333335)
+
+[node name="Label" type="Label" parent="Control/GameOver" unique_id=2005786446]
+modulate = Color(0.47843137, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -29.0
+offset_right = 43.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/GameOver" unique_id=213247984]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.0
+offset_top = 18.0
+offset_right = 136.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoadButton" type="Button" parent="Control/GameOver/HBoxContainer" unique_id=1982695063]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Load last save
+"
+
+[node name="QuitButton" type="Button" parent="Control/GameOver/HBoxContainer" unique_id=1932738411]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "quit to title"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=1303304903]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -67.0
+offset_top = 13.0
+offset_right = -3.0
+offset_bottom = 34.0
+grow_horizontal = 0
+
+[node name="Control" type="Control" parent="Control/HBoxContainer" unique_id=1089919970]
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/HBoxContainer/Control" unique_id=1828622683]
+position = Vector2(-0.99999994, 8.999999)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("4_tdgrf")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/HBoxContainer/Control" unique_id=78857622]
+libraries/ = SubResource("AnimationLibrary_4jtec")
+autoplay = &"default"
+
+[node name="GoldCountLabel" type="Label" parent="Control/HBoxContainer" unique_id=543438539]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "0"
